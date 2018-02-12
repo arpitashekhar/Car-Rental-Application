@@ -1,0 +1,19 @@
+<h2>My Profile</h2>
+<table class="table">
+  <thead class="thead-default">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>User Id</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= @user.name %></td>
+        <td><%= @user.email %></td>
+        <td><%= @user.id %></td>
+        <td><%= link_to 'Edit', edit_user_registration_path %></td>
+      </tr>
+  </tbody>
+</table>

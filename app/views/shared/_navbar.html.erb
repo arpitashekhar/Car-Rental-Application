@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <% if current_user.nil? %>
+          <li class="nav-item">
+            <%= link_to 'Login', new_user_session_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Sign Up', new_user_registration_path, class: 'nav-link' %>
+          </li>
+      <% else %>
+          <li class="nav-item active">
+            <%= link_to 'Home', home_index_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'My Profile', edit_user_registration_path, class: 'nav-link' %>
+          </li>
+          <% if current_user.superadmin_role? || current_user.supervisor_role? %>
+            <li class="nav-item">
+              <%= link_to 'Manage Resources', rails_admin_path, class: 'nav-link' %>
+            </li>
+          <% end %>
+          <li class="nav-item">
+            <%= link_to 'New Reservation',cars_path ,method: 'Get', class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'My Reservations',reservations_path ,method: 'Get', class: 'nav-link' %>
+          </li>
+          <li class="nav-item float-rt">
+            <%= link_to 'Logout', destroy_user_session_path, method: 'delete', class: 'nav-link' %>
+          </li>
+    <% end %>
+    </ul>
+    <% if !current_user.nil? %>
+      <span>Welcome, <%= current_user.name%></span>
+    <% end %>
+  </div>
+</nav>

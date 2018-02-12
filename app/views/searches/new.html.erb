@@ -1,0 +1,23 @@
+<h1>Advanced Search for Cars</h1>
+<div class="col-6">
+<%= form_for @search, html: {class: "pure-form"} do |s| %>
+    <div class="field form-group">
+      <%= s.label :name %>
+      <%= s.text_field :name, class: "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= s.label :style %>
+      <%= s.text_field :style, class: "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= s.label :carstatus %>
+      <%= s.select :carstatus, options_for_select([ ['Available', "Available"], ['CheckedOut', "CheckedOut"], ['Reserved', "Reserved"]] ), {}, {:class => 'form-control'}%>
+    </div>
+    <div class="field form-group">
+      <%= s.label :location %>
+      <%= s.select :location, options_for_select(@locations), {include_blank: "Select Location"}, {class: "form-control selectpicker"} %>
+    </div>
+
+    <%= s.submit "Search", class: "btn btn-primary" %>
+<% end %>
+</div>

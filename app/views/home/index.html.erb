@@ -1,0 +1,14 @@
+<div class="intro-message">
+  <h1>Rent-A-Car</h1>
+  <% if current_user.nil? %>
+    <h3>Welcome, Sign up to learn more about our services.</h3>
+  <% else %>
+    <h3>Make a reservation!</h3>
+  <% end %>
+  <hr class="intro-divider">
+  <ul class="list-inline">
+    <li class="list-inline-item"><b>Convinent Reservations</b></li>
+    <li class="list-inline-item"><b>No Booking Fees</b></li>
+  </ul>
+
+</div>

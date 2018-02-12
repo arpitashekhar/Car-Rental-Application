@@ -1,0 +1,44 @@
+<h1>Search Results</h1>
+
+<p><%= link_to 'Back', new_search_path %></p>
+
+<% if @search.search_cars.empty? %>
+  <p>No records found</p>
+<% else %>
+
+    <table class="table">
+      <thead class="thead-default">
+      <tr>
+        <th>Name</th>
+        <th>Model</th>
+        <th>Manufacturer</th>
+        <th>Hourly Rate</th>
+        <th>Style</th>
+        <th>Location</th>
+        <th>Status</th>
+        <th>License</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @search.search_cars.each do |car| %>
+          <tr>
+            <td><%= car.name %></td>
+            <td><%= car.model %></td>
+            <td><%= car.manufacturer %></td>
+            <td><%= car.hourly_rate %></td>
+            <td><%= car.style %></td>
+            <td><%= car.location %></td>
+            <td><%= car.carstatus %></td>
+            <td><%= car.license %></td>
+            <td><%= link_to 'Checkout', new_reservation_path(:reservation_carID => car.id, :reservation_status => 'Reserved') %></td>
+            <td><%= link_to 'Reserve', new_reservation_path(:reservation_carID => car.id, :reservation_status => 'CheckedOut') %></td>
+
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+<% end %>

@@ -1,0 +1,54 @@
+<%= render partial:"car_search" %>
+<% if @cars.empty? %>
+    <p>
+      There are no Cars in the system
+    </p>
+<%else%>
+<br><br>
+<table class="table">
+  <thead class="thead-default">
+  <tr>
+    <th>Name</th>
+    <th>Model</th>
+    <th>Manufacturer</th>
+    <th>Hourly_rate</th>
+    <th>Style</th>
+    <th>Location</th>
+    <th>Carstatus</th>
+    <th>License</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+
+    <% @cars.each do |car| %>
+      <tr>
+        <td><%= car.name %></td>
+        <td><%= car.model %></td>
+        <td><%= car.manufacturer %></td>
+        <td><%= car.hourly_rate %></td>
+        <td><%= car.style %></td>
+        <td><%= car.location %></td>
+        <td><%= car.carstatus %></td>
+        <td><%= car.license %></td>
+        <% if car.active!="Inactive" %>
+            <td><%= link_to 'Reserve', new_reservation_path(:reservation_carID => car.id, :reservation_status => 'Reserved') %></td>
+            <td><%= link_to 'Checkout', new_reservation_path(:reservation_carID => car.id, :reservation_status => 'CheckedOut') %></td>
+        <%end %>
+        <% if (current_user.superadmin_role? || current_user.supervisor_role?)&& car.active!="Active" %>
+            <td><%= link_to 'Add Suggested Car', edit_car_path(car.id) %></td>
+        <%end %>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% end %>
+<% if current_user.superadmin_role? || current_user.supervisor_role? %>
+  <%= link_to 'New Car', new_car_path %>
+<%else%>
+    <%= link_to 'New Car Suggestion', new_car_path %>
+<% end %>

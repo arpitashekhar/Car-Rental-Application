@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>StartDate:</strong>
+  <%= @reservation.startdate.to_time.strftime('%B %e at %l:%M %p') %>
+</p>
+
+<p>
+  <strong>EndDate:</strong>
+  <%= @reservation.enddate.to_time.strftime('%B %e at %l:%M %p') %>
+</p>
+
+<p>
+  <strong>UserId:</strong>
+  <%= @reservation.userid %>
+</p>
+
+<p>
+  <strong>CarId:</strong>
+  <%= @reservation.carid %>
+</p>
+
+<p>
+  <strong>Reservation Status:</strong>
+  <%= @reservation.status %>
+</p>
+<%= link_to 'Back', reservations_path %>

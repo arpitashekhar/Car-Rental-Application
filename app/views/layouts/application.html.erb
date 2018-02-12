@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyProject</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render partial: "shared/navbar" %>
+    <% unless flash.empty? %>
+        <script type="text/javascript">
+            <% flash.each do |f| %>
+            <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+            toastr['<%= type %>']('<%= f[1] %>');
+            <% end %>
+        </script>
+    <% end %>
+
+    <div class="container mt-4">
+      <%= yield %>
+    </div>
+  </body>
+</html>

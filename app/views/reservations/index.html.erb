@@ -1,0 +1,45 @@
+
+<h1>Reservations</h1>
+<% if @reservations.empty? %>
+<p>
+  There are no current Reservations
+</p>
+<%else%>
+<table class="table">
+  <thead class="thead-default">
+  <tr>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>User Id</th>
+    <th>Car Id</th>
+    <th>Reservation Status</th>
+    <th>Reservation Cost</th>
+    <th colspan="6"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= reservation.startdate.to_time.strftime('%B %e at %l:%M %p')%></td>
+        <td><%= reservation.enddate.to_time.strftime('%B %e at %l:%M %p') %></td>
+        <td><%= reservation.userid %></td>
+        <td><%= reservation.carid %></td>
+        <td><%= reservation.status %></td>
+        <td><%= reservation.reservation_cost %></td>
+        <td><%= link_to 'Show', reservation, method: :get %></td>
+        <% if reservation.status == "Reserved" %>
+            <td><%= button_to 'Checkout', reservations_checkout_path(:id => reservation.id, :status => "CheckedOut"), method: :post, class:"btn btn-primary" %></td>
+            <td><%= button_to 'Cancel', reservations_cancel_path(:id => reservation.id), method: :post, class:"btn btn-secondary" %></td>
+        <% end %>
+        <% if reservation.status == "CheckedOut" %>
+            <td><%= button_to 'Return', reservations_return_path(:id => reservation.id), method: :post, class:"btn btn-primary" %></td>
+        <% end %>
+
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<%end%>

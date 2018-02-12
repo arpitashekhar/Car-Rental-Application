@@ -1,0 +1,58 @@
+<%= form_with(model: car, local: true) do |form| %>
+  <% if car.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(car.errors.count, "error") %> prohibited this car from being saved:</h2>
+
+      <ul>
+      <% car.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %><div class="col-sm-6">
+    <div class="field form-group">
+      <%= form.label :name %><br>
+      <%= form.text_field :name , class: "form-control"%>
+    </div>
+    <div class="field form-group">
+      <%= form.label :model %><br>
+      <%= form.text_field :model, class: "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= form.label :manufacturer %><br />
+      <%= form.text_field :manufacturer, class: "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= form.label :license %><br />
+      <%= form.text_field :license, class: "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= form.label :hourly_rate %><br>
+      <%= form.text_field :hourly_rate, class: "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= form.label :style %><br />
+      <%= form.select :style, options_for_select([ ['Coupe', "Coupe"], ['Sedan', "Sedan"], ['SUV', "SUV"]] ), {}, {:class => 'form-control'}%>
+    </div>
+    <div class="field form-group">
+      <%= form.label :location %><br>
+      <%= form.select :location, options_for_select([ ['Raleigh', "Raleigh"], ['Texas', "Texas"], ['Seattle', "Seattle"], ['California', "California"]] ), {}, {:class => 'form-control'}%>
+    </div>
+    <div class="field form-group">
+      <%= form.label :carstatus %><br>
+      <%= form.select :carstatus, options_for_select([ ['Available', "Available"], ['CheckedOut', "CheckedOut"], ['Reserved', "Reserved"]] ), {}, {:class => 'form-control'}%>
+    </div>
+    <% if current_user.superadmin_role? || current_user.supervisor_role? %>
+    <div class="field">
+      <%= form.hidden_field :active, :value => "Active"  %>
+    </div>
+    <% else %>
+        <div class="field">
+        <%= form.hidden_field :active, :value => "Inactive"  %>
+        </div>
+    <%end%>
+  <div class="actions">
+    <%= form.submit "Create Car", class: "btn btn-primary" %>
+  </div>
+</div>
+<% end %>
