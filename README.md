@@ -1,3 +1,4 @@
+# Car-Rental-Application
 The Car Rental Application is built using Ruby version: 2.3.3 and Rails 5.1.4
 
 Note:
@@ -47,4 +48,4 @@ Special Cases:
 1. When a car that is not yet returned is deleted, the reservation status remains "Reserved" until the "End time" of the reservation.
 2. When a car that is not yet returned is deleted, the checkout history of the user will say "Reserved" and the deleted car will not be available for any more reservations.
 3. When admins delete a car which has been checked out but not returned yet, the status of the reservation will remain "CheckedOut" until the "End time" of the reservation.
-# Car-Rental-Application
+
